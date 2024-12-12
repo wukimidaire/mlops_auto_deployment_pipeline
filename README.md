@@ -6,6 +6,20 @@ A production-ready machine learning training pipeline that implements automated 
 
 This project implements an automated MLOps workflow that:
 
+```mermaid
+graph TD
+    A[Fresh Data] -->|Fetch & Validate| B[Preprocessing]
+    B -->|Monitor| C[Production Model]
+    B -->|Train| D[Staging Model]
+    C -->|Evaluate| E{Performance Check}
+    D -->|Compare| E
+    E -->|Both Above Threshold| F[Compare Models]
+    F -->|Staging Better| G[Auto Deploy Staging]
+    F -->|Production Better| H[Keep Production]
+    E -->|Below Threshold| I[Human Review]
+    I -->|Decision| J[Deploy/Fix/Maintain]
+```
+
 ### 1. Continuous Monitoring 🔍
 - Monitors Production model performance over time
 - Tracks data quality and model metrics
@@ -50,20 +64,5 @@ When models don't meet criteria:
 - Rollback capabilities if needed
 - Continuous performance monitoring
 
-```mermaid
-graph TD
-    A[Fresh Data] -->|Fetch & Validate| B[Preprocessing]
-    B -->|Monitor| C[Production Model]
-    B -->|Train| D[Staging Model]
-    C -->|Evaluate| E{Performance Check}
-    D -->|Compare| E
-    E -->|Both Above Threshold| F[Compare Models]
-    F -->|Staging Better| G[Auto Deploy Staging]
-    F -->|Production Better| H[Keep Production]
-    E -->|Below Threshold| I[Human Review]
-    I -->|Decision| J[Deploy/Fix/Maintain]
-```
 
 
-
-<img src="https://wagon-public-datasets.s3.amazonaws.com/data-science-images/07-ML-OPS/wagoncab-workflow.png" alt="wagoncab_workflow" height=500>
